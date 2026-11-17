@@ -1,34 +1,118 @@
+
 <!doctype html>
-<html lang="uk"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#10141b"><title>MY PROTOCOL</title>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131b">
+<title>MY PROTOCOL</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#10141b;color:#f4f7fb;font:15px -apple-system,BlinkMacSystemFont,Arial}header{padding:18px;background:#151c26;position:sticky;top:0;border-bottom:1px solid #39485a;z-index:2}.brand{color:#75b8ff;font-size:11px;letter-spacing:2px}h1{margin:5px 0}main{max-width:720px;margin:auto;padding:14px 14px 80px}.muted,small{color:#9aa7b7}.tabs,.row{display:flex;gap:7px;flex-wrap:wrap}.tabs{overflow:auto;flex-wrap:nowrap;margin-bottom:12px}.tab,button{background:#263241;color:white;border:1px solid #405064;border-radius:10px;padding:10px 12px;font:inherit}.tab{white-space:nowrap}.active,.primary{background:#235b8d}.card{background:#1b222d;border:1px solid #39485a;border-radius:15px;padding:15px;margin:12px 0}.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stat{background:#263241;padding:12px;border-radius:10px}.stat b{display:block;font-size:23px;margin-top:5px}.item{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:center;padding:12px 0;border-top:1px solid #39485a}.item input[type=checkbox]{width:19px;height:19px}.dose{font-weight:bold;white-space:nowrap}.sub{font-size:12px;color:#9aa7b7;margin-top:4px}.hidden{display:none!important}input,select,textarea{width:100%;background:#111821;color:white;border:1px solid #405064;border-radius:9px;padding:10px;font:inherit}label{display:block;color:#9aa7b7;font-size:12px;margin:9px 0 5px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.wide{grid-column:1/-1}.weeks{display:flex;gap:5px;overflow:auto;margin:12px 0}.weeks button{min-width:39px}.days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.days button{padding:9px 2px;font-size:12px}.notice{background:#302b20;color:#ead9ae;padding:11px;border-radius:9px;font-size:12px;line-height:1.5}.modal{display:none;position:fixed;inset:0;background:#000b;z-index:5;padding:10px;align-items:end}.modal.open{display:flex}.sheet{background:#1b222d;border-radius:17px;padding:16px;width:100%;max-width:620px;margin:auto;max-height:92vh;overflow:auto}.checkdays{display:flex;gap:10px;flex-wrap:wrap}.checkdays label{display:flex;gap:4px;align-items:center}.checkdays input{width:auto}@media(min-width:650px){.modal{align-items:center}}
-</style></head><body>
-<header><div class="brand">MY PROTOCOL · PERSONAL TRACKER</div><h1>Мій протокол</h1><small>15 тижнів · 105 днів · локальні записи</small></header>
-<main>
-<nav class="tabs"><button class="tab active" data-tab="today">Сьогодні</button><button class="tab" data-tab="calendar">Календар</button><button class="tab" data-tab="protocol">Protocol</button><button class="tab" data-tab="labs">Контроль</button><button class="tab" data-tab="settings">Дані</button></nav>
-<section id="today"><div class="stats"><div class="stat"><small>Тиждень</small><b id="weekstat">01 / 15</b></div><div class="stat"><small>Виконано сьогодні</small><b id="percent">0%</b></div></div><div class="card"><div class="row" style="justify-content:space-between"><h2>План на день</h2><span id="daylabel" class="muted"></span></div><div id="todaylist"></div></div><div class="card"><h3>Нагадування</h3><p class="muted" id="notifyStatus">Сповіщення залежать від підтримки браузера. Фонова доставка не гарантується.</p><div class="row"><button id="allow">Дозволити сповіщення</button><button id="test">Тест</button></div></div><div class="notice">Журнал лише фіксує введені тобою дані й не є медичним призначенням. Перед внесенням звір назви, дози, графік і тривалість з лікарем. Не змінюй лікування на підставі нагадувань.</div></section>
-<section id="calendar" class="hidden"><div class="card"><h2>Календар · 15 тижнів</h2><div class="weeks" id="weeks"></div><div class="days" id="days"></div><h3 id="calheading"></h3><div id="callist"></div></div></section>
-<section id="protocol" class="hidden"><div class="card"><div class="row" style="justify-content:space-between"><h2>Мої позиції</h2><button class="primary" id="add">＋ Додати</button></div><p class="muted">Дозування, одиниці, дні та період можна редагувати.</p><div id="all"></div></div></section>
-<section id="labs" class="hidden"><div class="card"><h2>Контроль аналізів</h2><p class="muted">Позначай виконані обстеження.</p><div id="lablist"></div></div><div class="card"><h3>Фізична реабілітація</h3><p><b>1–2-й тиждень:</b> ходьба, легка мобілізація, вправи без провокації корінцевого болю.</p><p><b>3–4-й тиждень:</b> стабілізаційні вправи, поступове ізометричне навантаження.</p><p><b>5–6-й тиждень:</b> прогресивне силове навантаження з контролем симптомів.</p><small>Узгоджуй навантаження з фахівцем з реабілітації.</small></div></section>
-<section id="settings" class="hidden"><div class="card"><h2>Початок програми</h2><label>Дата початку</label><input type="date" id="startdate"><button class="primary" id="saveDate">Зберегти дату</button></div><div class="card"><h2>Резервна копія</h2><p class="muted">Експорт або перенесення даних між пристроями.</p><button id="export">Експортувати JSON</button><label>Імпорт резервної копії</label><input type="file" id="import" accept=".json,application/json"></div></section>
-</main>
-<div class="modal" id="modal"><form class="sheet" id="form"><div class="row" style="justify-content:space-between"><h2 id="formtitle">Нова позиція</h2><button type="button" id="close">Закрити</button></div><input type="hidden" id="eid"><label>Назва</label><input id="name" required placeholder="Назва позиції"><div class="grid"><div><label>Дозування</label><input id="dose" required inputmode="decimal" placeholder="Введи дозу"></div><div><label>Одиниця</label><select id="unit"><option>мг</option><option>мкг</option><option>МО</option><option>мл</option><option>г</option><option>капсул</option><option>таблеток</option></select></div><div><label>Час</label><select id="time"><option>Натщесерце</option><option>Ранок · з їжею</option><option>Після сніданку</option><option>Обід</option><option>Після вечері</option><option>Перед сном</option><option>Інше</option></select></div><div><label>Початок, день</label><input id="from" type="number" min="1" max="105" value="1"></div><div><label>Завершення, день</label><input id="to" type="number" min="1" max="105" value="28"></div><div class="wide"><label>Дні тижня</label><div class="checkdays"><label><input type="checkbox" name="wd" value="0">Пн</label><label><input type="checkbox" name="wd" value="1">Вт</label><label><input type="checkbox" name="wd" value="2">Ср</label><label><input type="checkbox" name="wd" value="3">Чт</label><label><input type="checkbox" name="wd" value="4">Пт</label><label><input type="checkbox" name="wd" value="5">Сб</label><label><input type="checkbox" name="wd" value="6">Нд</label></div></div><div class="wide"><label>Примітка</label><textarea id="note" rows="2"></textarea></div></div><div class="row"><button class="primary" type="submit">Зберегти</button><button type="button" id="delete">Видалити</button></div></form></div>
+*{box-sizing:border-box}body{margin:0;background:#10131b;color:#f3f5fa;font:15px Arial,sans-serif}header{padding:22px 17px 14px;background:#171c27;position:sticky;top:0;z-index:2}h1{font-size:23px;margin:0 0 5px}small,.muted{color:#9aa5b8}.wrap{padding:15px;max-width:700px;margin:auto}.tabs{display:flex;gap:7px;overflow:auto;margin:12px 0}.tabs button,button{background:#252d3b;color:#fff;border:1px solid #3a4558;border-radius:10px;padding:11px 14px;font-size:14px}.tabs button.active{background:#5268a8}.panel{background:#191f2b;border:1px solid #30394a;border-radius:13px;padding:14px;margin:12px 0}.item{display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid #30394a;padding:12px 0}.item:last-child{border:0}.item input{width:21px;height:21px;accent-color:#7795f4}.item strong{display:block;margin-bottom:5px}.meta{font-size:12px;color:#9aa5b8}.right{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}input,select{background:#101722;color:white;border:1px solid #3a4558;border-radius:8px;padding:10px;max-width:100%}.field{display:grid;gap:6px;margin:10px 0}.field input,.field select{width:100%}.primary{background:#536eb5}.danger{background:#713c47}.hidden{display:none}.stat{display:flex;justify-content:space-between;margin:9px 0}.bar{height:8px;background:#30394a;border-radius:8px;overflow:hidden}.bar span{display:block;height:100%;background:#7795f4}.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{background:#202838;border-radius:8px;padding:7px 2px;text-align:center;font-size:12px;min-height:48px}.day b{display:block;font-size:15px;margin-bottom:4px}.day.done{background:#294a43}.day.today{outline:2px solid #7795f4}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}h2{font-size:18px}.note{font-size:12px;color:#aab3c3;line-height:1.5}
+</style>
+</head>
+<body>
+<header><h1>MY PROTOCOL</h1><small>PERSONAL TRACKER · 15 ТИЖНІВ</small></header>
+<div class="wrap">
+<div class="tabs">
+<button class="active" data-tab="today">Сьогодні</button>
+<button data-tab="calendar">Календар</button>
+<button data-tab="protocol">Protocol</button>
+<button data-tab="data">Дані</button>
+</div>
+<section id="today">
+<div class="panel">
+<div class="stat"><span>Дата початку протоколу</span><input type="date" id="start"></div>
+<div class="stat"><b id="dayLabel">День 1</b><span id="weekLabel">Тиждень 1 з 15</span></div>
+<div class="bar"><span id="progress" style="width:0%"></span></div>
+<p class="muted" id="dateLabel"></p>
+</div>
+<div class="panel"><h2>План на сьогодні</h2><div id="todayList"></div><p id="emptyToday" class="muted"></p></div>
+<div class="panel"><div class="stat"><b>Виконано сьогодні</b><b id="count">0/0</b></div></div>
+</section>
+<section id="calendar" class="hidden">
+<div class="panel"><h2>Календар · 105 днів</h2><div id="calendarGrid" class="grid"></div><p class="note">Натисни на день, щоб переглянути його завдання.</p></div>
+</section>
+<section id="protocol" class="hidden">
+<div class="panel"><div class="stat"><h2>Мій протокол</h2><button class="primary" id="add">+ Додати</button></div><div id="allItems"></div></div>
+</section>
+<section id="data" class="hidden">
+<div class="panel"><h2>Налаштування та резервна копія</h2>
+<p class="note">Дані зберігаються в пам'яті цього браузера на цьому пристрої. Експортуй резервну копію, щоб не втратити записи.</p>
+<div class="actions"><button class="primary" id="export">Експорт JSON</button><button id="importBtn">Імпорт JSON</button><input type="file" id="importFile" accept=".json,application/json" class="hidden"></div>
+<p class="note">Якщо очистити дані Safari або відкрити сайт в іншому браузері, записи можуть не зберегтися.</p>
+</div>
+<div class="panel"><h2>Медична примітка</h2><p class="note">Цей додаток лише фіксує введений користувачем графік і відмітки. Він не підтверджує безпечність або доцільність препаратів і доз. Узгоджуй призначення, тривалість та поєднання ліків із лікарем.</p></div>
+</section>
+</div>
 <script>
-const $=x=>document.getElementById(x),dn=['Пн','Вт','Ср','Чт','Пт','Сб','Нд'],labnames=['Ліпідограма','Гомоцистеїн','Естрадіол','Пролактин','Феритин','% насичення трансферину залізом','С-реактивний білок'];
-let items=JSON.parse(localStorage.mp_items||'[]'),done=JSON.parse(localStorage.mp_done||'{}'),labs=JSON.parse(localStorage.mp_labs||'{}'),start=localStorage.mp_start||new Date().toISOString().slice(0,10),week=1,day=1;
-function save(){localStorage.mp_items=JSON.stringify(items);localStorage.mp_done=JSON.stringify(done);localStorage.mp_labs=JSON.stringify(labs)}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function today(){let a=new Date(start+'T12:00:00');return Math.max(1,Math.min(105,Math.floor((new Date()-a)/86400000)+1))}
-function list(id,n){let a=items.filter(x=>n>=x.from&&n<=x.to&&x.days.includes((n-1)%7));$(id).innerHTML='';if(!a.length){$(id).innerHTML='<p class="muted">На цей день немає записів. Додай позиції в Protocol.</p>';return}a.forEach(x=>{let k=x.id+'_'+n,e=document.createElement('div');e.className='item';e.innerHTML='<input type="checkbox" '+(done[k]?'checked':'')+'><div><b>'+esc(x.name)+'</b><div class="sub">'+esc(x.time)+' · '+esc(x.note)+'</div></div><div class="dose">'+esc(x.dose)+' '+esc(x.unit)+'</div>';e.querySelector('input').onchange=v=>{done[k]=v.target.checked;save();render()};$(id).append(e)})}
-function render(){let n=today(),a=items.filter(x=>n>=x.from&&n<=x.to&&x.days.includes((n-1)%7));$('weekstat').textContent=String(Math.ceil(n/7)).padStart(2,'0')+' / 15';$('daylabel').textContent='День '+n;$('percent').textContent=(a.length?Math.round(a.filter(x=>done[x.id+'_'+n]).length/a.length*100):0)+'%';list('todaylist',n);let cal=(week-1)*7+day;list('callist',cal);$('calheading').textContent='Тиждень '+week+' · День '+cal+' · '+dn[day-1];$('weeks').innerHTML='';for(let w=1;w<=15;w++){let b=document.createElement('button');b.textContent='Т'+w;b.className=w===week?'active':'';b.onclick=()=>{week=w;render()};$('weeks').append(b)}$('days').innerHTML='';dn.forEach((v,i)=>{let b=document.createElement('button');b.textContent=v;b.className=i+1===day?'active':'';b.onclick=()=>{day=i+1;render()};$('days').append(b)});$('all').innerHTML='';items.forEach(x=>{let e=document.createElement('div');e.className='item';e.innerHTML='<span>•</span><div><b>'+esc(x.name)+'</b><div class="sub">'+esc(x.time)+' · '+esc(x.days.map(i=>dn[i]).join(', '))+' · дні '+x.from+'–'+x.to+'</div></div><div class="dose">'+esc(x.dose)+' '+esc(x.unit)+' <button>✎</button></div>';e.querySelector('button').onclick=()=>edit(x.id);$('all').append(e)});$('lablist').innerHTML='';labnames.forEach((v,i)=>{let l=document.createElement('label');l.style.display='flex';l.style.gap='9px';l.style.alignItems='center';l.innerHTML='<input type="checkbox" style="width:auto" '+(labs[i]?'checked':'')+'> '+v;l.querySelector('input').onchange=e=>{labs[i]=e.target.checked;localStorage.mp_labs=JSON.stringify(labs)};$('lablist').append(l)})}
-function edit(id){let x=items.find(y=>y.id===id);$('eid').value=x?.id||'';$('formtitle').textContent=x?'Редагувати позицію':'Нова позиція';$('name').value=x?.name||'';$('dose').value=x?.dose||'';$('unit').value=x?.unit||'мг';$('time').value=x?.time||'Ранок · з їжею';$('from').value=x?.from||1;$('to').value=x?.to||28;$('note').value=x?.note||'';document.querySelectorAll('[name=wd]').forEach(c=>c.checked=x?x.days.includes(+c.value):false);$('delete').style.display=x?'':'none';$('modal').classList.add('open')}
-$('add').onclick=()=>edit();$('close').onclick=()=>$('modal').classList.remove('open');$('delete').onclick=()=>{items=items.filter(x=>x.id!==$('eid').value);save();$('modal').classList.remove('open');render()};
-$('form').onsubmit=e=>{e.preventDefault();let days=[...document.querySelectorAll('[name=wd]:checked')].map(c=>+c.value),from=+$('from').value,to=+$('to').value;if(!days.length||from<1||to>105||to<from)return alert('Перевір дні та період 1–105.');let x={id:$('eid').value||String(Date.now()),name:$('name').value.trim(),dose:$('dose').value,unit:$('unit').value,time:$('time').value,from,to,days,note:$('note').value};let i=items.findIndex(y=>y.id===x.id);if(i<0)items.push(x);else items[i]=x;save();$('modal').classList.remove('open');render()};
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));['today','calendar','protocol','labs','settings'].forEach(x=>$(x).classList.toggle('hidden',x!==b.dataset.tab))});
-$('startdate').value=start;$('saveDate').onclick=()=>{start=$('startdate').value||start;localStorage.mp_start=start;render();alert('Дату збережено')};
-$('allow').onclick=async()=>{if(!('Notification'in window))return alert('Браузер не підтримує сповіщення');let p=await Notification.requestPermission();$('notifyStatus').textContent=p==='granted'?'Дозвіл на сповіщення надано. Фонова доставка не гарантована.':'Дозвіл не надано.'};
-$('test').onclick=()=>{if('Notification'in window&&Notification.permission==='granted')new Notification('MY PROTOCOL',{body:'Тестове сповіщення'});else alert('Спочатку дозволь сповіщення')};
-$('export').onclick=()=>{let a=document.createElement('a'),u=URL.createObjectURL(new Blob([JSON.stringify({items,done,labs,start},null,2)],{type:'application/json'}));a.href=u;a.download='my-protocol-backup.json';a.click();URL.revokeObjectURL(u)};
-$('import').onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text());items=d.items||[];done=d.done||{};labs=d.labs||{};start=d.start||start;localStorage.mp_start=start;$('startdate').value=start;save();render();alert('Дані імпортовано')}catch{alert('Не вдалося прочитати файл')}};
-render();
-</script></body></html>
+const $=id=>document.getElementById(id);
+const uid=()=>Math.random().toString(36).slice(2,10);
+const seed=[
+["Тестостерон ципіонат/енантат","200","мг","Інʼєкція",1,28,[1],0,"Понеділок"],
+["ХГЛ","500","МО","Інʼєкція",1,28,[2,6],0,"Вівторок і субота"],
+["Анастрозол","0,25","мг","За графіком",1,28,[2,6],0,"Вівторок і субота"],
+["BPC-157 · ранок","1000","мкг","Ранок",1,7,[],0,"Дні 1–7"],
+["BPC-157 · вечір","1000","мкг","Вечір",1,7,[],0,"Дні 1–7"],
+["BPC-157 · ранок","500","мкг","Ранок",8,28,[],0,"Дні 8–28"],
+["BPC-157 · вечір","500","мкг","Вечір",8,28,[],0,"Дні 8–28"],
+["Тепла вода","0,5–0,7","л","Натще",1,28,[],0,"За 40 хв до сніданку"],
+["Лактоферин","500","мг","Натще",1,28,[],0,""],
+["Желатин","20–30","г","Натще",1,28,[],0,""],
+["Аскорбат C","1000","мг","Натще",1,28,[],0,""],
+["Вітамін D3","10000","МО","Ранок з їжею",1,28,[],0,""],
+["Thorne Elite","3","капсули","Ранок з їжею",1,28,[],0,""],
+["Коензим Q10","200","мг","Ранок з їжею",1,28,[],0,""],
+["Альфа-ліпоєва кислота","300","мг","Після сніданку",1,28,[],0,""],
+["Уридинмонофосфат","300","мг","Ранок",1,28,[],0,"Одна ціла таблетка"],
+["Celebrex","200","мг","Ранок після їжі",1,7,[],0,"Тривалість у вихідному списку: 7 днів"],
+["Серрапептаза","120000","МО","Ранок після їжі",1,14,[],0,""],
+["TMG","1000","мг","Ранок після їжі",1,28,[],0,""],
+["NAC","1800","мг","Обід",1,28,[],0,""],
+["TMG","1000","мг","Обід",1,28,[],0,""],
+["Крестор","10","мг","Обід",1,28,[],2,"Через день від дня початку"],
+["Thorne Elite","3","капсули","Вечір після вечері",1,28,[],0,""],
+["TMG","1000","мг","Вечір після вечері",1,28,[],0,""],
+["Альфа-ліпоєва кислота","300","мг","Вечір після вечері",1,28,[],0,""],
+["Celebrex","200","мг","Вечір після вечері",1,14,[],0,"Тривалість у вихідному списку: 14 днів"],
+["Серрапептаза","120000","МО","Вечір після вечері",1,14,[],0,""],
+["Магній гліцинат","600","мг","Перед сном",1,28,[],0,""],
+["Колаген UC2","80","мг","Перед сном",1,28,[],0,""],
+["Магнекор","75","мг","Перед сном",1,28,[],0,""]
+].map(x=>({id:uid(),name:x[0],dose:x[1],unit:x[2],time:x[3],from:x[4],to:x[5],days:x[6],every:x[7],note:x[8]}));
+let items=JSON.parse(localStorage.getItem("mp_v3_items")||"null")||seed;
+let checks=JSON.parse(localStorage.getItem("mp_v3_checks")||"{}");
+let start=localStorage.getItem("mp_v3_start")||new Date().toISOString().slice(0,10);
+$("start").value=start;
+function save(){localStorage.setItem("mp_v3_items",JSON.stringify(items));localStorage.setItem("mp_v3_checks",JSON.stringify(checks));localStorage.setItem("mp_v3_start",start)}
+function dateAt(n){let d=new Date(start+"T12:00:00");d.setDate(d.getDate()+n-1);return d}
+function dayNum(d=new Date()){let a=new Date(start+"T00:00:00"),b=new Date(d.getFullYear(),d.getMonth(),d.getDate());return Math.floor((b-a)/86400000)+1}
+function due(x,n){if(n<x.from||n>x.to)return false;if(x.every>0)return (n-x.from)%x.every===0;if(x.days.length)return x.days.includes(dateAt(n).getDay());return true}
+function key(n,id){return n+"_"+id}
+function listFor(n){return items.filter(x=>due(x,n))}
+function renderToday(n=dayNum()){
+let arr=listFor(n),done=arr.filter(x=>checks[key(n,x.id)]).length;
+$("dayLabel").textContent=n>=1&&n<=105?"День "+n:"Поза межами протоколу";
+$("weekLabel").textContent="Тиждень "+Math.max(1,Math.ceil(n/7))+" з 15";
+$("dateLabel").textContent=dateAt(Math.max(1,n)).toLocaleDateString("uk-UA",{day:"numeric",month:"long",year:"numeric"});
+$("progress").style.width=Math.max(0,Math.min(100,n/105*100))+"%";
+$("count").textContent=done+"/"+arr.length;
+$("todayList").innerHTML=arr.map(x=>`<div class="item"><input type="checkbox" ${checks[key(n,x.id)]?"checked":""} onchange="toggle(${n},'${x.id}',this.checked)"><div><strong>${esc(x.name)}</strong><div>${esc(x.dose)} ${esc(x.unit)} · ${esc(x.time)}</div><div class="meta">${esc(x.note||"")}</div></div><button onclick="editItem('${x.id}')">Змінити</button></div>`).join("");
+$("emptyToday").textContent=arr.length?"":"На цей день немає запланованих записів.";
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+window.toggle=(n,id,v)=>{checks[key(n,id)]=v;save();renderToday(n);renderCalendar()}
+function renderAll(){$("allItems").innerHTML=items.map(x=>`<div class="item"><div><strong>${esc(x.name)}</strong><div>${esc(x.dose)} ${esc(x.unit)} · ${esc(x.time)}</div><div class="meta">Дні ${x.from}–${x.to}${x.days.length?" · Дні тижня: "+x.days.map(d=>["Нд","Пн","Вт","Ср","Чт","Пт","Сб"][d]).join(", "):""}${x.every?" · Через "+x.every+" дні":""}</div></div><div class="right"><button onclick="editItem('${x.id}')">Змінити</button><button class="danger" onclick="removeItem('${x.id}')">Видалити</button></div></div>`).join("")}
+window.editItem=id=>{let x=items.find(a=>a.id===id);if(!x)return;let v=prompt("Назва запису",x.name);if(v===null)return;x.name=v;v=prompt("Доза",x.dose);if(v===null)return;x.dose=v;v=prompt("Одиниця виміру",x.unit);if(v===null)return;x.unit=v;v=prompt("Час / блок",x.time);if(v===null)return;x.time=v;v=prompt("Початковий день протоколу",x.from);if(v===null)return;x.from=Math.max(1,+v||1);v=prompt("Останній день протоколу",x.to);if(v===null)return;x.to=Math.min(105,+v||105);v=prompt("Дні тижня через кому (0=Нд, 1=Пн...6=Сб). Порожньо = щодня",x.days.join(","));if(v===null)return;x.days=v.trim()?v.split(",").map(a=>+a.trim()).filter(a=>a>=0&&a<=6):[];v=prompt("Повтор через N днів; 0 = не використовувати",x.every);if(v===null)return;x.every=Math.max(0,+v||0);save();renderAll();renderToday();renderCalendar()};
+window.removeItem=id=>{if(confirm("Видалити цей запис?")){items=items.filter(x=>x.id!==id);save();renderAll();renderToday();renderCalendar()}};
+$("add").onclick=()=>{let name=prompt("Назва запису");if(!name)return;let dose=prompt("Доза","");if(dose===null)return;let unit=prompt("Одиниця виміру","мг");if(unit===null)return;let time=prompt("Час / блок","Ранок");if(time===null)return;items.push({id:uid(),name,dose,unit,time,from:1,to:28,days:[],every:0,note:""});save();renderAll();renderToday();renderCalendar()};
+function renderCalendar(){let n=dayNum();$("calendarGrid").innerHTML=Array.from({length:105},(_,i)=>{let d=i+1,a=listFor(d),done=a.filter(x=>checks[key(d,x.id)]).length;return `<div class="day ${d===n?"today":a.length&&done===a.length?"done":""}" onclick="showDay(${d})"><b>${d}</b>${a.length?done+"/"+a.length:"—"}</div>`}).join("")}
+window.showDay=n=>{document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab==="today"));["today","calendar","protocol","data"].forEach(t=>$(t).classList.toggle("hidden",t!=="today"));renderToday(n);window.scrollTo(0,0)};
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(z=>z.classList.toggle("active",z===b));["today","calendar","protocol","data"].forEach(t=>$(t).classList.toggle("hidden",t!==b.dataset.tab));if(b.dataset.tab==="protocol")renderAll();if(b.dataset.tab==="calendar")renderCalendar();if(b.dataset.tab==="today")renderToday()});
+$("start").onchange=()=>{start=$("start").value||start;save();renderToday();renderCalendar()};
+$("export").onclick=()=>{let blob=new Blob([JSON.stringify({items,checks,start},null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="my-protocol-backup.json";a.click();URL.revokeObjectURL(a.href)};
+$("importBtn").onclick=()=>$("importFile").click();
+$("importFile").onchange=async e=>{try{let d=JSON.parse(await e.target.files[0].text());if(!Array.isArray(d.items))throw Error();items=d.items;checks=d.checks||{};start=d.start||start;$("start").value=start;save();renderAll();renderToday();renderCalendar();alert("Резервну копію відновлено")}catch(err){alert("Не вдалося прочитати файл")}};
+renderToday();renderAll();renderCalendar();
+</script>
+</body>
+</html>
